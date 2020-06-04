@@ -9,12 +9,15 @@ import java.util.Stack;
  * @date 2020/6/4 10:14
  * <p>
  * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ *
+ * Runtime: 2 ms, faster than 30.56% of Java online submissions for Valid Parentheses.
+ * Memory Usage: 37.5 MB, less than 5.06% of Java online submissions for Valid Parentheses.
+ *
  */
 public class ValidParentheses {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.isValid("()[{]}"));
-
     }
 
     private static class Solution {
@@ -38,6 +41,5 @@ public class ValidParentheses {
             if (stack.empty()) return true;
             return false;
         }
-
     }
 }
