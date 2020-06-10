@@ -32,7 +32,7 @@ import java.util.Stack;
 public class GenerateParenthesis {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        List<String> list = solution.generateParenthesis(3);
+        List<String> list = solution.generateParenthesis(9);
         list.stream().forEach(System.out::println);
     }
 
