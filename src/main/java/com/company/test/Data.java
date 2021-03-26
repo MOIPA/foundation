@@ -1,4 +1,4 @@
-package com.test;
+package com.company.test;
 
 /**
  * @author tr
