@@ -1,5 +1,12 @@
 package com.company.test;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * @author tr
  * @date 2020/6/22 21:20
@@ -15,5 +22,12 @@ public class main_test {
 
         int b = a.linerSearch(3);
         System.out.println(b);
+
+        LocalDateTime localDateTime = Instant.ofEpochSecond(1615451340).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time = localDateTime.format(formatter);
+        System.out.println(time);
+        System.out.println(LocalDateTime.of(2021,3,11,0,0).toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
+
     }
 }
