@@ -3,9 +3,7 @@ package com.company.transferHex;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -50,37 +48,21 @@ public class ExcelFileController {
             }
         }
         this.data = new LinkedList<>();
-        int[] properties = getProperties();
+        int[] properties = ConfigReader.getExeclPosi();
         //3:获取数据
         for (int i = 1; i < sheet.getRows(); i++) {
             String ifRepeat = sheet.getCell(properties[0], i).getContents();
             if (ifRepeat.equals("1")) {
-                String[] tmp = new String[3];
+                String[] tmp = new String[4];
                 tmp[0] = sheet.getCell(properties[1], i).getContents();
                 tmp[1] = sheet.getCell(properties[2], i).getContents();
                 tmp[2] = sheet.getCell(properties[3], i).getContents();
+                tmp[3] = sheet.getCell(properties[4], i).getContents();
                 this.data.add(tmp);
             }
         }
         //最后一步：关闭资源
         workbook.close();
-    }
-
-    public int[] getProperties() throws IOException {
-        int[] res = new int[4];
-        Properties properties = new Properties();
-        // 使用InPutStream流读取properties文件
-        String root = System.getProperty("user.dir");
-        String FileName="config.properties";
-        String filePath = root+File.separator+FileName;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-        properties.load(bufferedReader);
-        // 获取key对应的value值
-        res[0]= Integer.parseInt(properties.getProperty("ifRepeat"));
-        res[1]= Integer.parseInt(properties.getProperty("signalName"));
-        res[2]= Integer.parseInt(properties.getProperty("udpByte"));
-        res[3]= Integer.parseInt(properties.getProperty("bitOffset"));
-        return res;
     }
 
 }

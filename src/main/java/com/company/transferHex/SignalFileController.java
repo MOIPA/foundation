@@ -6,15 +6,6 @@ import java.util.List;
 class SignalFileController {
     private String filePath = "";
     private byte[] bytes = null;
-//    private List<Integer> left = null;
-
-//    public List<Integer> getLeft() {
-//        return left;
-//    }
-//
-//    public void setLeft(List<Integer> left) {
-//        this.left = left;
-//    }
 
     public byte[] getBytes() {
         return bytes;

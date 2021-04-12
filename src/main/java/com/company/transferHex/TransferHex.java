@@ -5,6 +5,8 @@ import jxl.read.biff.BiffException;
 import javax.swing.*;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TransferHex {
 
@@ -148,7 +150,17 @@ public class TransferHex {
                 ioException.printStackTrace();
                 JOptionPane.showMessageDialog(panel, "打开信号文件失败", "修改结果", JOptionPane.WARNING_MESSAGE);
             }
+            // 过滤重复端口信号
+            try {
+                data = filterDataByPort(data);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                JOptionPane.showMessageDialog(panel, "端口过滤信号失败", "修改结果", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            // 如果指定了目标信号，过滤
             if (!targetSignal.equals("")) {
+                assert data != null;
                 data.forEach(x -> {
                     if (x[0].equals(targetSignal)) {
                         fc.changePosition(x[1], Integer.parseInt(x[2]), Integer.parseInt(udpOffset));
@@ -162,12 +174,18 @@ public class TransferHex {
                     });
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(panel, "修改信号失败", "修改结果", JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
                 JOptionPane.showMessageDialog(panel, "全部信号修改结束", "修改结果", JOptionPane.WARNING_MESSAGE);
             }
             fc.writeFile();
         });
 
+    }
+
+    private static List<String[]> filterDataByPort(List<String[]> data) throws IOException {
+        Map<String, Byte> filterRule = ConfigReader.getFilterRule();
+        return data.stream().filter(x -> filterRule.get(x[3])==null || filterRule.get(x[3]) == 1).collect(Collectors.toList());
     }
 
 }
