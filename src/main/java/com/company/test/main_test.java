@@ -29,5 +29,8 @@ public class main_test {
         System.out.println(time);
         System.out.println(LocalDateTime.of(2020,3,11,0,0).toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
 
+        System.out.println("time util");
+        System.out.println(Util.isDateInInterval(new Date(),new Date(2021-1900,7-1,10),new Date(2021-1900,7-1,14)));
+
     }
 }

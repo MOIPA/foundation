@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PascalTriangleII119 {
     public static void main(String[] args){
-        System.out.println(new Solution().generate(0));
+        System.out.println(new Solution().generate(30));
     }
 
     /**
